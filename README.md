@@ -6,7 +6,6 @@ My name is Valeria, and I am originally from Guatemala, but I was raised in Mexi
 Now I live in Germany, where I am currently pursuing a Bachelor's degree in Digital Media with a minor in Museum Studies.
 My dream is to work for in a Museum! Perhaps not as a curator but in the Marketing department. 
 
-# A snapshot of Lüneburg
-Walking around the city and capturing small moments is one of my favorite activities.
-This is a favorite from last year.
-![Old timey buildings made of brick](images/Luneburg.png)
+# My favorite animal 
+This is a Quokka. It's one of my favorite animals. 
+![smiling quokka](https://images.app.goo.gl/NmyfG6Crd6uA5Z2ZA)
