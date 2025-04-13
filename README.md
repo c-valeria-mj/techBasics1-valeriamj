@@ -8,4 +8,4 @@ My dream is to work for in a Museum! Perhaps not as a curator but in the Marketi
 
 # My favorite animal 
 This is a Quokka. It's one of my favorite animals. 
-![smiling quokka](https://images.app.goo.gl/NmyfG6Crd6uA5Z2ZA)
+![quokka](/Users/valeriamansilla/techBasics1-valeriamj/images/quokka.jpeg)
