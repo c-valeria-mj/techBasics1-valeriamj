@@ -62,15 +62,16 @@ for x, y in chacracterOptions.items():
     print(y)
 
 while True:
-    playerChoice = typingInput("Select a character by typing 1, 2 or 3: ")
-    # checkInt(playerChoice)
-    if int(playerChoice) != 1 and playerChoice != 2 and playerChoice != 3:
-        playerChoice = typingInput("Please select a valid character option (1, 2 or 3) to continue.")
-    else:
-        break
+    try:
+        playerChoice = int(typingInput("\n Select a character by typing 1, 2 or 3: "))
+        if int(playerChoice) != 1 and playerChoice != 2 and playerChoice != 3:
+            typingPrint("Invalid option!")
+        else:
+            break
+    except ValueError:
+        print ("Invalid input!")
 
-typingPrint("\bPress any key to continue...")
-os.system("pause")
+time.sleep(5)
 clearScreen()
 
 # print text explaining the quest to the user
@@ -92,12 +93,10 @@ time.sleep(1)
 for i in castle:
     print(i)
 
-typingPrint("\nThe king of these land has entrusted you and your companions with recovering \bthe magical object.\n"
+typingPrint("\nThe king of these land has entrusted you and your companions with recovering \nthe magical object.\n"
             "A daunting task that promises not only fame and glory but a sizeable reward in \ngold and silver.\n")
 
-time.sleep(1)
-typingPrint("\bPress any key to continue...")
-os.system("pause")
+time.sleep(5)
 clearScreen()
 
 mountains = [
@@ -114,11 +113,12 @@ mountains = [
 for i in mountains:
     print(i)
 
-typingPrint("After a long month of journeying across unforgiving lands you stop atop \na mountain. "
-            "Looming in the distance, you can finally see your destination. "
-            "A tower, dark and imposing that radiates danger and evilness. "
-            "You continue on, knowing that obtaining the magical object will not \ncome easy. ")
-time.sleep(3)
+typingPrint("After a long month of journeying across unforgiving lands you stop atop \na mountain. \n"
+            "Looming in the distance, you can finally see your destination. \n"
+            "A tower, dark and imposing that radiates danger and evilness. \n"
+            "You continue on, knowing that obtaining the magical object will not \ncome easy. \n")
+time.sleep(5)
+
 # have the user pick whether to go in front of the party or the back
 
 # have the user pick between left or right
