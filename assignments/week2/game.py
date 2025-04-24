@@ -5,7 +5,6 @@
 import time,os,sys
 
 # These are the functions we will need to run our game
-
 def typingPrint(text):  # prints text character by character for a cool effect
     for character in text:
         sys.stdout.write(character)
