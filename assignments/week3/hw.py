@@ -24,12 +24,12 @@ iconOptions = { # this dictionary holds the icons the user can choose for their 
 }
 
 faceOptions = { # this dictionary holds the face expressions they can choose for their bunny
-    "1) Happy" : "*()*",
-    "2) Sad" : "",
-    "3) Surprised" : "",
-    "4) Angry" : "",
-    "5) Love it" : "",
-    "6) Sleepy" : "",
+    "1) Happy" : "*(^o^)*",
+    "2) Sad" : "(._.)",
+    "3) Surprised" : "(*O*)",
+    "4) Angry" : "(>_<)",
+    "5) Loving" : "(♡.♡)",
+    "6) Sleepy" : "(9_9)",
 }
 
 def printASCII(asciiArt): # iterates over an array holding ascii art and prints each line
@@ -41,7 +41,11 @@ def printASCII(asciiArt): # iterates over an array holding ascii art and prints 
 '''
 print("Welcome! This program allows you to print your own ASCII art like this:\n")
 printASCII(defaultBunny)
-print("First, choose the icon you want your bunny to hold from the potions above: ")
-
-for x, y in iconOptions.items():
+# clearScreen
+for x, y in iconOptions.items(): # iterate over dictionary to show user the icon options
     print(f"{x} - {y}")
+print("First, choose the icon you want your bunny to hold from the options above: ")
+#clearScreen
+for x, y in faceOptions.items(): # iterate over dictionary to show user the face options
+    print(f"{x} - {y}")
+print("First, choose the face you want for your bunny from the options above: ")
