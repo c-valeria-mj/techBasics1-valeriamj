@@ -1,6 +1,7 @@
 # Assignment 3 - due 28.04.25
 # ASCII art with user input (3 user inputs - 1 str and 2 int, 1 nested loop & 1 conditional statement, use random & list)
-#import libraries we need for our program here
+
+# import libraries we need for our program here
 import time,os,sys,random,copy
 
 defaultBunny = [ # this list holds the template of the bunny that the user can customize
@@ -38,7 +39,7 @@ iconOptions = [ # this list holds the icons the user can choose for their bunny 
     ["8) Random"]
 ]
 
-faceOptions = [ # this dictionary holds the face expressions they can choose for their bunny
+faceOptions = [ # this list holds the face expressions they can choose for their bunny
     ["1) Happy: ", "( ^o^)"],
     ["2) Sad: ", "( ._.)"],
     ["3) Surprised: ", "( *O*)"],
