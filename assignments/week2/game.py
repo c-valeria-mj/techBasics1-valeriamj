@@ -231,7 +231,7 @@ if entranceChoice == 'front':
             waitAndClearScreen(3)
     else:
         typingPrint("You ran away! Returning in shame and empty handed to the king. Will you try again?\n")
-        os.abort()
+        sys.exit(0)
 
 # this is the endgame
 printASCII(mage)
