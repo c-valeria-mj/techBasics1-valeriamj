@@ -1,8 +1,28 @@
 # Assignment 4 - due 06.05.2025
 # This is a mini Dungeons and Dragons game inspired by Stardew Valley's mini-game: Solarion Chronicles
 
+"""
+    Assignment 4 Requirements:
+    [x] Use main function
+    [x] Define some constants at the top of your program.
+        - typingPrintSpeed: this sets the speed at which the text prints, can be more easily modified internally to find the right medium
+    [x] Define at least one function that takes arguments and returns a value
+        - I already had typingInput(): adds cool typing effect to the input statements too and stores their value (made following tutorial from the internet)
+        - I added getIntegerInput(): this is used to get an integer and check it’s 1) within range and 2) an integer and not any other data type
+        - I also added getStringChoice(option1, option2): which is used to get a string input from the user that is meant to be one of two specific choices.
+            it returns that choice.
+    EXTRA:
+    [x] Fix bugs
+    - Fix bug where player could still make it to the end game despite running away from the monster at the bottom of the tower
+    [x] Beutify code with Pycharm
+    [x] Add comments
+    - I had some comments already for assignment3, but I added more, especially to the main() function,
+        this way the gist of the game is understandable within it
+"""
+
 # Import libraries needed
 import time, os, sys
+
 
 # These are the functions we will need to run our game
 
@@ -12,16 +32,19 @@ def typingPrint(text):  # prints text character by character for a cool effect
         sys.stdout.flush()
         time.sleep(typingPrintSpeed)
 
+
 def clearScreen():  # clears terminal in-between text output for better user experience
     os.system("clear")
+
 
 def typingInput(text):  # prints input prompt text character by character for a cool effect
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(typingPrintSpeed)
     value = input()
     return value
+
 
 def waitAndClearScreen(seconds):  # waits an amount of seconds and then clears the screen
     typingPrint("\nLoading")
@@ -30,14 +53,17 @@ def waitAndClearScreen(seconds):  # waits an amount of seconds and then clears t
         time.sleep(1)
     clearScreen()
 
+
 def printASCII(asciiArt):  # iterates over an array holding ascii art and prints each line
     for i in asciiArt:
         print(i)
 
-def printDictionary(dictionary): # print all key-item pairs in a dictionary
+
+def printDictionary(dictionary):  # print all key-item pairs in a dictionary
     for x, y in dictionary.items():
         print(x)
         print(y)
+
 
 def getIntegerInput():
     while True:
@@ -49,6 +75,16 @@ def getIntegerInput():
                 return playerChoice
         except ValueError:
             typingPrint("Invalid input! \n")
+
+
+def getStringChoice(option1: str, option2: str):
+    while True:
+        choice = typingInput(f"Type '{option1}' or '{option2}' to choose: ")
+        if choice.lower() != option1 and choice.lower() != option2:
+            typingPrint("Invalid option! Please type a valid option.\n")
+        else:
+            return choice
+
 
 # this dictionary hold the different character options the user can play as
 characterOptions = {
@@ -146,12 +182,21 @@ mage = [
 ]
 
 # these global variables are needed for the game
-typingPrintSpeed = 0.05
-playerCharacterChoice = None
+typingPrintSpeed = 0.05  # sets the speed at which things are displayed on screen to the user
+playerCharacterChoice = None  # this holds the character the player chose to play as
+entranceChoice = None  # this holds the user's pick between going in the 'front' or 'back' at the bottom of the tower
+monsterChoice = None  # this holds the user's choice to fight or run away from the monster
+fightChoice = None  # this holds how the user chooses to fight the monster: 'shield' or 'weapon'
+warriorChoice = None  # this holds the user's engame choice if they chose warrior
+healerChoice = None  # this holds the user's engame choice if they chose healer
+wizardChoice = None  # this holds the user's engame choice if they chose wizard
+DEBUG = False
 
-"""
+'''
     This is where the game starts 
-"""
+'''
+
+
 def gameSetup():
     # print welcome message for the user
     clearScreen()
@@ -174,8 +219,9 @@ def gameSetup():
     time.sleep(1)
     printASCII(castle)
 
-    typingPrint("\nThe king of these lands has entrusted you and your companions with recovering The Sword of Destiny.\n"
-                "A daunting task that promises not only fame and glory but a sizeable reward in gold and silver.\n")
+    typingPrint(
+        "\nThe king of these lands has entrusted you and your companions with recovering The Sword of Destiny.\n"
+        "A daunting task that promises not only fame and glory but a sizeable reward in gold and silver.\n")
 
     waitAndClearScreen(3)
 
@@ -187,54 +233,37 @@ def gameSetup():
                 "You continue on, knowing that obtaining The Sword of Destiny will not come easy. \n")
     waitAndClearScreen(3)
 
+
 '''
     First player choice, go in front or back
 '''
+
+
 def frontOfTower():
     # have the user pick whether to go in front of the party or the back
     printASCII(tower)
-
     typingPrint(
         "\nAt last! You reach your destination, the tower that is home to the evil mage that stole The Sword of Destiny.\n"
         "Ahead lie many dangers to you and your companions.\n"
         "Standing at the entrance to the tower do you...\n"
         "   Go in the front. Fortune favors the bold.\n"
         "   Search for a back entrance. It's better to remain hidden.\n"
-        )
-    while True:
-        entranceChoice = typingInput("Type 'front' or 'back' to choose: ")
-        if entranceChoice.lower() != 'front' and entranceChoice.lower() != 'back':
-            # print(entranceChoice)
-            typingPrint("Invalid option! Please type a valid option.\n")
-        else:
-            break
-
+    )
+    entranceChoice = getStringChoice('front', 'back')
     waitAndClearScreen(3)
-
-    if entranceChoice == 'front':
+    if entranceChoice.lower() == 'front':
         printASCII(monster)
         typingPrint("\nA monster is guarding the hallway, blocking your path!\n"
                     "Do you...\n"
                     "   Fight the monster.\n"
                     "   Run away.\n")
-        while True:
-            monsterChoice = typingInput("Type 'fight' or 'run' to choose: ")
-            if monsterChoice.lower() != 'fight' and monsterChoice.lower() != 'run':
-                typingPrint("Invalid option! Please type a valid option.\n")
-            else:
-                break
+        monsterChoice = getStringChoice('fight', 'run')
         if monsterChoice.lower() == 'fight':
             typingPrint("The monster lunges at you with unnatural speed!\n"
                         "Do you...\n"
                         "   Raise your shield.\n"
                         "   Swing your weapon.\n")
-            while True:
-                fightChoice = typingInput("Type 'shield' or 'weapon' to choose: ")
-                if fightChoice.lower() != 'shield' and fightChoice.lower() != 'weapon':
-
-                    typingPrint("Invalid option! Please type a valid option.\n")
-                else:
-                    break
+            fightChoice = getStringChoice('shield', 'weapon')
             if monsterChoice.lower() == 'weapon':
                 typingPrint("The monster is too quick! While you raise your weapon it attacks.\n"
                             "You're sent flying back with the force of their attack.\n"
@@ -247,11 +276,14 @@ def frontOfTower():
                 waitAndClearScreen(3)
         else:
             typingPrint("You ran away! Returning in shame and empty handed to the king. Will you try again?\n")
-            sys.exit(0)
+            sys.exit(0)  # terminate game if player runs away
+
 
 '''
     Endgame (different depending on what the player chose to play as)
 '''
+
+
 def endgame():
     # this is the endgame
     printASCII(mage)
@@ -263,12 +295,7 @@ def endgame():
                     "Do you...\n"
                     "   Rush the enemy first, taking advantage of the element of surprise.\n"
                     "   Wait for a window of opportunity when to best strike the evil mage.\n")
-        while True:
-            warriorChoice = typingInput("Type 'rush' or 'wait' to choose: ")
-            if warriorChoice.lower() != 'rush' and warriorChoice.lower() != 'wait':
-                typingPrint("Invalid option! Please type a valid option.\n")
-            else:
-                break
+        warriorChoice = getStringChoice('rush', 'wait')
         if warriorChoice.lower() == 'wait':
             typingPrint("The wizard in your party casts a spell to paralyze the evil mage.\n"
                         "Allowing you the perfect opportunity to land the killing blow on the evil mage\n"
@@ -287,12 +314,7 @@ def endgame():
                     "Do you...\n"
                     "   Heal the warrior.\n"
                     "   Heal the wizard.\n")
-        while True:
-            healerChoice = typingInput("Type 'warrior' or 'wizard' to choose: ")
-            if healerChoice.lower() != 'warrior' and healerChoice.lower() != 'wizard':
-                typingPrint("Invalid option! Please type a valid option.\n")
-            else:
-                break
+        healerChoice = getStringChoice('warrior', 'wizard')
         if healerChoice.lower() == 'warrior':
             typingPrint("You heal the warrior. They immediately rush at the evil mage and hit them with a sword.\n"
                         "It's not enough the evil mage is still standing. You have to improvise.\n"
@@ -301,20 +323,16 @@ def endgame():
                         "It works! Your companions and you have succeeded, The Sword of Destiny is once again\n"
                         "in your hands and the world is safe.")
         else:
-            typingPrint("You heal the wizard. It allows them enough time to throw a fireball of their own at the evil mage.\n"
-                        "It does enough damage to defeat the evil mage. \n"
-                        "Your companions and you have succeeded! The Sword of Destiny is once again in your hands and the world is safe.\n")
+            typingPrint(
+                "You heal the wizard. It allows them enough time to throw a fireball of their own at the evil mage.\n"
+                "It does enough damage to defeat the evil mage. \n"
+                "Your companions and you have succeeded! The Sword of Destiny is once again in your hands and the world is safe.\n")
     else:  # ending if player chose wizard
         typingPrint("You stand beside your warrior companion and prepare to attack the evil mage.\n"
                     "Do you...\n"
                     "   Cast a protective spell on your party anticipating the evil mage's next move.\n"
                     "   Cast a strong spell at the evil mage and hope it's enough.\n")
-        while True:
-            wizardChoice = typingInput("Type 'protect' or 'attack' to choose: ")
-            if wizardChoice.lower() != 'protect' and wizardChoice.lower() != 'attack':
-                typingPrint("Invalid option! Please type a valid option.\n")
-            else:
-                break
+        wizardChoice = getStringChoice('protect', 'attack')
         if wizardChoice.lower() == 'protect':
             typingPrint("As you predicted, the evil mage casts their strongest spell\n"
                         "Protecting your companions allows the warrior to rush the evil mage.\n"
@@ -329,9 +347,10 @@ def endgame():
 
 
 def main():
-    gameSetup() # welcome user, have user select character & print quest text
-    frontOfTower() # player arrives at destination and has 1st encounter
-    endgame() # different endgame scenarios depending on the character they chose at the beginning
+    gameSetup()  # welcome user, have user select character & print quest text
+    frontOfTower()  # player arrives at destination and has 1st encounter
+    endgame()  # different endgame scenarios depending on the character they chose at the beginning
+
 
 if __name__ == "__main__":
     main()
