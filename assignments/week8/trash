@@ -1,0 +1,20 @@
+self.sprites.append(pygame.image.load('catwalk/1.png'))
+        self.sprites.append(pygame.image.load('catwalk/2.png'))
+        self.sprites.append(pygame.image.load('catwalk/3.png'))
+        self.sprites.append(pygame.image.load('catwalk/4.png'))
+        self.sprites.append(pygame.image.load('catwalk/5.png'))
+        self.sprites.append(pygame.image.load('catwalk/6.png'))
+        self.sprites.append(pygame.image.load('catwalk/7.png'))
+        self.sprites.append(pygame.image.load('catwalk/8.png'))
+
+class Cat(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y):
+        super().__init__()
+        self.image = pygame.surface.Surface((10, 10))
+        self.image.fill(color=(255, 255, 255))
+        self.rect = self.image.get_rect()
+        self.rect.center =  [pos_x, pos_y]
+
+# moving_sprites =  pygame.sprite.Group() # allows us to draw/modify all sprites
+# cat = Cat(10, 10)
+# moving_sprites.add(cat)
