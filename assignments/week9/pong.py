@@ -182,6 +182,14 @@ while True:
             pygame.quit() # uninitializes the pygame module
             sys.exit() # closes entire program
 
+        '''if game_manager.opponent_score == 5:
+            pygame.quit()  # uninitializes the pygame module
+            sys.exit()  # closes entire program
+
+        if game_manager.player_score == 5:
+            pygame.quit()  # uninitializes the pygame module
+            sys.exit()  # closes entire program'''
+
         # opponent is controlled wit W (up) and S (down)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
