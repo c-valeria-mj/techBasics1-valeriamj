@@ -2,6 +2,11 @@
 # Following tutorial from https://www.youtube.com/watch?v=UZg49z76cLw
 # Using game assets from https://opengameart.org/content/flappy-beans
 
+"""
+    This is a Flappy Bird like game but with coffe beans :)
+    Use the SPACE key to make the coffee bean 'flap/fly'
+"""
+
 import pygame, sys, random
 
 pygame.init()
